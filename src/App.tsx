@@ -1,9 +1,14 @@
+import { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router";
+
 function App() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    navigate("/register");
+  }, []);
   return (
     <>
-      <main className="bg-[url(/src/assets/auth-bg.svg)] bg-cover bg-no-repeat max-w-screen min-h-screen">
-        Hello Mycord
-      </main>
+      <Outlet />
     </>
   );
 }
