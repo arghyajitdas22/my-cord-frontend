@@ -3,8 +3,12 @@ import * as React from "react";
 interface ILoginFormProps {}
 
 const LoginForm: React.FunctionComponent<ILoginFormProps> = () => {
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("logging in...");
+  };
   return (
-    <form className="w-full flex flex-col space-y-4">
+    <form className="w-full flex flex-col space-y-4" onSubmit={handleLogin}>
       {/* email */}
       <div className="w-full flex flex-col space-y-2">
         <label htmlFor="email" className="auth-label">
