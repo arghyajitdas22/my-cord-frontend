@@ -4,14 +4,17 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerFormUserSchema } from "../../validators/user.validator";
 import { z } from "zod";
+import { useAuth } from "../../hooks/useAuth";
 
 interface IRegisterFormProps {}
 
+export type IRegisterUserSchema = z.infer<typeof registerFormUserSchema>;
+
 const RegisterForm: React.FunctionComponent<IRegisterFormProps> = () => {
+  const { registerMutation } = useAuth();
+
   const [showpasswordMessage, setShowPasswordMessage] =
     React.useState<boolean>(false);
-
-  type IRegisterUserSchema = z.infer<typeof registerFormUserSchema>;
 
   const {
     register,
@@ -22,7 +25,7 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = () => {
   });
 
   const handleRegister: SubmitHandler<IRegisterUserSchema> = (data) => {
-    console.log(data);
+    registerMutation.mutate(data);
   };
 
   const handleErrors = () => {

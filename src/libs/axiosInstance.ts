@@ -14,6 +14,8 @@ axiosInstance.interceptors.request.use(
     return config;
   },
   (error) => {
+    console.log(error);
+    //--TODO: Implement the logic to handle the error and remove this console.log
     return Promise.reject(error);
   }
 );
@@ -21,9 +23,11 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => {
     console.log(response);
+    //--TODO: Implement the logic to handle the response and remove this console.log
     return response;
   },
   async (error) => {
+    //--TODO: Implement the logic to handle the error
     console.log(error);
   }
 );
