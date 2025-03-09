@@ -26,7 +26,7 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = () => {
   };
 
   const handleErrors = () => {
-    console.log(errors);
+    if (errors.password) setShowPasswordMessage(true);
   };
 
   return (
@@ -52,6 +52,11 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = () => {
               ) || "Please provide a valid email address",
           })}
         />
+        {errors.email && (
+          <p className="text-xs text-red-500 text-wrap">
+            Please provide a valid email address
+          </p>
+        )}
       </div>
       {/* dispaly name */}
       <div className="w-full flex flex-col space-y-2">
@@ -64,9 +69,18 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = () => {
           id="displayName"
           className="auth-input"
           {...register("displayName", {
-            required: { value: true, message: "Please provide a display name" },
+            required: { value: true, message: "Provide a display name" },
+            minLength: {
+              value: 1,
+              message: "Provide display name",
+            },
           })}
         />
+        {errors.displayName && (
+          <p className="text-xs text-red-500 text-wrap">
+            Please provide a display name
+          </p>
+        )}
       </div>
       {/* username */}
       <div className="w-full flex flex-col space-y-2">
@@ -86,6 +100,11 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = () => {
             },
           })}
         />
+        {errors.username && (
+          <p className="text-xs text-red-500 text-wrap">
+            Please provide a username
+          </p>
+        )}
       </div>
       {/* password */}
       <div className="w-full flex flex-col space-y-2">
@@ -113,7 +132,7 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = () => {
           })}
         />
         {showpasswordMessage && (
-          <p className="text-xs text-gray-100 text-wrap">
+          <p className="text-xs text-red-500 text-wrap">
             Password must contain at least 6 characters, including one uppercase
             letter, one lowercase letter, one number and one special character
           </p>
@@ -183,6 +202,11 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = () => {
             ))}
           </select>
         </div>
+        {(errors.month || errors.year || errors.day) && (
+          <p className="text-xs text-red-500 text-wrap">
+            Please provide a valid date of birth
+          </p>
+        )}
       </div>
       {/* continue */}
       <button type="submit" className="submit-btn">

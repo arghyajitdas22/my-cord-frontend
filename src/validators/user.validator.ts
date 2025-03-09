@@ -14,9 +14,11 @@ const registerFormUserSchema = z.object({
     ),
   displayName: z
     .string({ required_error: "Please provide a display name" })
+    .min(1, { message: "Please provide a display name" })
     .trim(),
   username: z
     .string({ required_error: "Please provide a username" })
+    .min(1, { message: "Please provide a username" })
     .max(20)
     .trim(),
   password: z
