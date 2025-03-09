@@ -1,19 +1,2 @@
 @import "tailwindcss";
-
-@layer components {
-  .auth-label {
-    @apply text-xs font-medium text-white uppercase;
-  }
-
-  .red-ast {
-    @apply text-red-400;
-  }
-
-  .auth-input {
-    @apply w-full rounded-sm bg-black text-white border-none focus:outline-none focus:border-none focus:ring-0 p-2.5;
-  }
-
-  .submit-btn {
-    @apply w-full bg-[#5865f2] text-white rounded-sm py-2 px-4 font-medium text-center cursor-pointer;
-  }
-}
+@import "./styles/auth.style.css";
