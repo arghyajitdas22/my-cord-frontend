@@ -20,12 +20,18 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<IRegisterUserSchema>({
     resolver: zodResolver(registerFormUserSchema),
   });
 
   const handleRegister: SubmitHandler<IRegisterUserSchema> = (data) => {
-    registerMutation.mutate(data);
+    registerMutation.mutate(data, {
+      onSuccess: () => {
+        reset();
+        //--TODO: Add routing to dashboard
+      },
+    });
   };
 
   const handleErrors = () => {
@@ -212,7 +218,11 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = () => {
         )}
       </div>
       {/* continue */}
-      <button type="submit" className="submit-btn">
+      <button
+        type="submit"
+        className="submit-btn"
+        disabled={registerMutation.isPending}
+      >
         Continue
       </button>
     </form>

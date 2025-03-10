@@ -142,4 +142,20 @@ const loginUserSchema = z.object({
     ),
 });
 
-export { registerFormUserSchema, registerUserSchema, loginUserSchema };
+const userStateSchema = z
+  .object({
+    _id: z.string(),
+    email: z.string().email(),
+    displayName: z.string(),
+    username: z.string(),
+  })
+  .passthrough();
+
+export type TUserState = z.infer<typeof userStateSchema>;
+
+export {
+  registerFormUserSchema,
+  registerUserSchema,
+  loginUserSchema,
+  userStateSchema,
+};
