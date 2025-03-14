@@ -3,12 +3,13 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginUserSchema } from "../../validators/user.validator";
 import { z } from "zod";
+import { useAuth } from "../../hooks/useAuth";
 
 interface ILoginFormProps {}
+export type ILoginUserSchema = z.infer<typeof loginUserSchema>;
 
 const LoginForm: React.FunctionComponent<ILoginFormProps> = () => {
-  type ILoginUserSchema = z.infer<typeof loginUserSchema>;
-
+  const { loginMutation } = useAuth();
   const {
     register,
     handleSubmit,
@@ -18,7 +19,12 @@ const LoginForm: React.FunctionComponent<ILoginFormProps> = () => {
   });
 
   const handleLogin: SubmitHandler<ILoginUserSchema> = (data) => {
-    console.log(data);
+    loginMutation.mutate(data, {
+      onSuccess: () => {
+        loginMutation.reset();
+        //--TODO: Add routing to dashboard
+      },
+    });
   };
   return (
     <form

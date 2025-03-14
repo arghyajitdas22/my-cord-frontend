@@ -1,7 +1,11 @@
-import { registerUserSchema } from "../validators/user.validator";
+import {
+  loginUserSchema,
+  registerUserSchema,
+} from "../validators/user.validator";
 import axiosInstance from "../libs/axiosInstance";
 import { IRegisterUserSchema } from "../components/auth/RegisterForm";
 import { registerUserResponseSchema } from "../validators/response.validator";
+import { ILoginUserSchema } from "../components/auth/LoginForm";
 
 const registerUser = async (registerFormData: IRegisterUserSchema) => {
   const refinedUserData = {
@@ -21,4 +25,11 @@ const registerUser = async (registerFormData: IRegisterUserSchema) => {
   return validatedResponse;
 };
 
-export { registerUser };
+const loginUser = async (loginFormData: ILoginUserSchema) => {
+  const validatedUser = loginUserSchema.parse(loginFormData);
+  const response = await axiosInstance.post("/auth/login", validatedUser);
+  const validatedResponse = registerUserResponseSchema.parse(response);
+  return validatedResponse;
+};
+
+export { registerUser, loginUser };
