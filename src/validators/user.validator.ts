@@ -153,6 +153,12 @@ const userStateSchema = z
 
 export type TUserState = z.infer<typeof userStateSchema>;
 
+export type TUSerStorage = {
+  state: {
+    user: TUserState;
+  };
+};
+
 export {
   registerFormUserSchema,
   registerUserSchema,

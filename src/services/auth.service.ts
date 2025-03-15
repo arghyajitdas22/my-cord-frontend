@@ -1,6 +1,7 @@
 import {
   loginUserSchema,
   registerUserSchema,
+  TUSerStorage,
 } from "../validators/user.validator";
 import axiosInstance from "../libs/axiosInstance";
 import { IRegisterUserSchema } from "../components/auth/RegisterForm";
@@ -39,12 +40,29 @@ const refreshUserToken = async () => {
     const validatedResponse = registerUserResponseSchema.parse(response);
     localStorage.setItem("accessToken", validatedResponse.data.accessToken);
   } catch (error) {
-    //--TODO: call logout api
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("user-storage");
-    window.location.href = "/login";
+    await logoutUser();
     toast.error("Session expired. Please login again");
   }
 };
 
-export { registerUser, loginUser, refreshUserToken };
+const logoutUser = async () => {
+  try {
+    const userData = localStorage.getItem("user-storage")
+      ? (JSON.parse(
+          localStorage.getItem("user-storage") as string
+        ) as TUSerStorage)
+      : null;
+    if (userData) {
+      await axiosInstance.post("/auth/logout", {
+        userId: userData.state.user._id,
+      });
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("user-storage");
+    }
+    window.location.href = "/login";
+  } catch (error) {
+    toast.error("Could not logout user");
+  }
+};
+
+export { registerUser, loginUser, refreshUserToken, logoutUser };

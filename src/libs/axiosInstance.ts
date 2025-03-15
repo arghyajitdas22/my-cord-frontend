@@ -26,7 +26,6 @@ axiosInstance.interceptors.response.use(
     return response.data;
   },
   async (error) => {
-    //--TODO: Implement the logic to handle the error
     const err = error as AxiosError;
     if (err.code === "ERR_NETWORK") {
       toast.error("Network error");

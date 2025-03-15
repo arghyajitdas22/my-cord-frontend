@@ -5,14 +5,16 @@ import { TUserState } from "../validators/user.validator";
 interface IUserStore {
   user: TUserState | null;
   setUser: (user: TUserState) => void;
+  getUser: () => TUserState | null;
   logout: () => void;
 }
 
 export const useUser = create<IUserStore>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       user: null,
       setUser: (user) => set({ user }),
+      getUser: () => get().user,
       logout: () => set({ user: null }),
     }),
     {
