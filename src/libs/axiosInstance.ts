@@ -1,4 +1,7 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import { toast } from "react-toastify";
+import { refreshUserToken } from "../services/auth.service";
+import { errorResponseSchema } from "../validators/response.validator";
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -24,7 +27,17 @@ axiosInstance.interceptors.response.use(
   },
   async (error) => {
     //--TODO: Implement the logic to handle the error
-    console.log(error);
+    const err = error as AxiosError;
+    if (err.code === "ERR_NETWORK") {
+      toast.error("Network error");
+    } else if (err.response && err.response.status === 401) {
+      await refreshUserToken();
+    } else if (err.response && err.response.status === 500) {
+      toast.error("Internal server error");
+    } else {
+      const errorData = errorResponseSchema.parse(err.response?.data);
+      toast.error(errorData.message);
+    }
   }
 );
 

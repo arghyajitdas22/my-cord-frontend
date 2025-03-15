@@ -86,7 +86,11 @@ const LoginForm: React.FunctionComponent<ILoginFormProps> = () => {
         )}
       </div>
       {/* login */}
-      <button type="submit" className="submit-btn">
+      <button
+        type="submit"
+        className="submit-btn"
+        disabled={loginMutation.isPending}
+      >
         Log In
       </button>
     </form>

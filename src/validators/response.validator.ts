@@ -9,6 +9,13 @@ export const responseSchema = z.object({
   success: z.boolean(),
 });
 
+export const errorResponseSchema = z
+  .object({
+    statusCode: z.number().int(),
+    message: z.string(),
+  })
+  .passthrough();
+
 export const registerUserResponseSchema = responseSchema.extend({
   data: z.object({
     accessToken: z.string(),
@@ -17,5 +24,7 @@ export const registerUserResponseSchema = responseSchema.extend({
 });
 
 export type ApiResponse<T> = z.infer<typeof responseSchema> & { data: T };
+
+export type ErrorResponse = z.infer<typeof errorResponseSchema>;
 
 export type TRegisterUserData = z.infer<typeof registerUserResponseSchema>;

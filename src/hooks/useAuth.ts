@@ -27,10 +27,6 @@ export const useAuth = () => {
       setUser(data.data.user);
       toast.success("User logged in successfully");
     },
-    onError: () => {
-      //--TODO: Add error handling
-      toast.error("User could not be logged in");
-    },
   });
 
   return { registerMutation, loginMutation };
