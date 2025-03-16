@@ -13,7 +13,7 @@ const AuthCard: React.FunctionComponent<IAuthCardProps> = ({
   children,
 }) => {
   return (
-    <div className="bg-slate-800 md:rounded-md w-screen md:w-[420px] p-4 md:p-8 flx flex-col space-y-5">
+    <section className="bg-slate-800 md:rounded-md w-screen md:w-[420px] p-4 md:p-8 flx flex-col space-y-5">
       <h1 className="text-2xl font-bold text-center text-white">{title}</h1>
       {children}
       <NavLink
@@ -22,7 +22,7 @@ const AuthCard: React.FunctionComponent<IAuthCardProps> = ({
       >
         {purpose === 0 ? "Already have an account?" : "Create an account!"}
       </NavLink>
-    </div>
+    </section>
   );
 };
 

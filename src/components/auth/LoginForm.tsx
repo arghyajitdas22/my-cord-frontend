@@ -22,7 +22,6 @@ const LoginForm: React.FunctionComponent<ILoginFormProps> = () => {
     loginMutation.mutate(data, {
       onSuccess: () => {
         loginMutation.reset();
-        //--TODO: Add routing to dashboard
       },
     });
   };

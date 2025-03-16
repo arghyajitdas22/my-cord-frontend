@@ -12,7 +12,6 @@ export type IRegisterUserSchema = z.infer<typeof registerFormUserSchema>;
 
 const RegisterForm: React.FunctionComponent<IRegisterFormProps> = () => {
   const { registerMutation } = useAuth();
-
   const [showpasswordMessage, setShowPasswordMessage] =
     React.useState<boolean>(false);
 
@@ -29,7 +28,6 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = () => {
     registerMutation.mutate(data, {
       onSuccess: () => {
         reset();
-        //--TODO: Add routing to dashboard
       },
     });
   };

@@ -8,6 +8,7 @@ import AuthLogin from "./pages/auth/AuthLogin.tsx";
 import { QueryClientProvider } from "@tanstack/react-query";
 import queryClient from "./libs/queryClient.ts";
 import { Bounce, ToastContainer } from "react-toastify";
+import Channel from "./pages/channels/channel.page.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -17,6 +18,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="/" element={<App />}>
             <Route path="register" element={<AuthRegister />} />
             <Route path="login" element={<AuthLogin />} />
+            <Route path="channel/:id" element={<Channel />} />
           </Route>
         </Routes>
       </BrowserRouter>
