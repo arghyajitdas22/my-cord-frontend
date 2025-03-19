@@ -8,7 +8,7 @@ interface ISideNavProps {}
 const SideNav: React.FunctionComponent<ISideNavProps> = () => {
   const user = useUser((state) => state.user);
   return (
-    <nav className="hidden md:flex md:flex-col gap-y-2.5 w-16 h-screen pt-3 bg-black">
+    <nav className="hidden md:flex md:flex-col gap-y-2.5 w-16 h-screen pt-3 bg-gray-900">
       {/* me */}
       <NavLink
         to={`channel/${user?._id}`}

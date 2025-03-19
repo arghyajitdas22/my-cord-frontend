@@ -11,7 +11,6 @@ function App() {
     else {
       try {
         await refreshUserToken();
-        navigate(`/channel/${user._id}`);
       } catch (error) {
         navigate("/login");
       }
