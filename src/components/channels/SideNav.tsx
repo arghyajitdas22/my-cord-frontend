@@ -11,7 +11,7 @@ const SideNav: React.FunctionComponent<ISideNavProps> = () => {
     <nav className="hidden md:flex md:flex-col gap-y-2.5 w-16 h-screen pt-3 bg-gray-900">
       {/* me */}
       <NavLink
-        to={`channel/${user?._id}`}
+        to={`/channel/${user?._id}`}
         className="flex gap-x-2 items-center h-fit"
       >
         {({ isActive }) =>
