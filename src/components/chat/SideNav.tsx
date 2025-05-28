@@ -1,19 +1,14 @@
 import * as React from "react";
 import { NavLink } from "react-router";
 import { DiscordLogo, Plus } from "@phosphor-icons/react";
-import { useUser } from "../../hooks/useUser";
 
 interface ISideNavProps {}
 
 const SideNav: React.FunctionComponent<ISideNavProps> = () => {
-  const user = useUser((state) => state.user);
   return (
     <nav className="hidden md:flex md:flex-col gap-y-2.5 w-16 h-screen pt-3 bg-gray-900">
-      {/* me */}
-      <NavLink
-        to={`/channel/${user?._id}`}
-        className="flex gap-x-2 items-center h-fit"
-      >
+      {/* logged in user's dms with no dm selected */}
+      <NavLink to={`/chat`} className="flex gap-x-2 items-center h-fit">
         {({ isActive }) =>
           isActive ? (
             <>
