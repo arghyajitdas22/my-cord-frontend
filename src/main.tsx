@@ -2,25 +2,16 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
-import { BrowserRouter, Routes, Route } from "react-router";
-import AuthRegister from "./pages/auth/AuthRegister.tsx";
-import AuthLogin from "./pages/auth/AuthLogin.tsx";
+import { BrowserRouter } from "react-router";
 import { QueryClientProvider } from "@tanstack/react-query";
 import queryClient from "./libs/queryClient.ts";
 import { Bounce, ToastContainer } from "react-toastify";
-import Channel from "./pages/channels/channel.page.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />}>
-            <Route path="register" element={<AuthRegister />} />
-            <Route path="login" element={<AuthLogin />} />
-            <Route path="channel/:id" element={<Channel />} />
-          </Route>
-        </Routes>
+        <App />
       </BrowserRouter>
     </QueryClientProvider>
     <ToastContainer

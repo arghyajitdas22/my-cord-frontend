@@ -1,28 +1,54 @@
-import { useEffect } from "react";
-import { Outlet, useNavigate } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import { useUser } from "./hooks/useUser";
-import { refreshUserToken } from "./services/auth.service";
+import AuthRegister from "./pages/auth/AuthRegister";
+import PublicRoute from "./components/common/PublicRoute";
+import AuthLogin from "./pages/auth/AuthLogin";
+import PrivateRoute from "./components/common/PrivateRoute";
 
 function App() {
-  const navigate = useNavigate();
   const user = useUser((state) => state.user);
-  const refreshUser = async () => {
-    if (!user) navigate("/login");
-    else {
-      try {
-        await refreshUserToken();
-      } catch (error) {
-        navigate("/login");
-      }
-    }
-  };
-  useEffect(() => {
-    refreshUser();
-  }, []);
+  const accessToken = localStorage.getItem("accessToken");
+
   return (
-    <>
-      <Outlet />
-    </>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          !user || !accessToken ? (
+            <Navigate to={"/login"} />
+          ) : (
+            <Navigate to={"/chat"} />
+          )
+        }
+      />
+
+      <Route
+        path="/register"
+        element={
+          <PublicRoute>
+            <AuthRegister />
+          </PublicRoute>
+        }
+      />
+
+      <Route
+        path="/login"
+        element={
+          <PublicRoute>
+            <AuthLogin />
+          </PublicRoute>
+        }
+      />
+
+      <Route
+        path="/chat"
+        element={
+          <PrivateRoute>
+            <div>Let's think</div>
+          </PrivateRoute>
+        }
+      />
+    </Routes>
   );
 }
 
