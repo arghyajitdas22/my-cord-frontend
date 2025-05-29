@@ -1,4 +1,5 @@
 import * as React from "react";
+import SideNav from "../../components/common/SideNav";
 
 interface ICommonLayoutProps {}
 
@@ -8,6 +9,16 @@ const CommonLayout: React.FunctionComponent<ICommonLayoutProps> = () => {
       <header className="w-full py-2 text-center text-white text-base uppercase">
         my cord
       </header>
+
+      <div className="flex">
+        <SideNav />
+        <section className="border-t border-l rounded-tl-md border-[#40444b] h-screen w-full flex">
+          {/* chats section */}
+          <section className="rounded-tl-md h-screen w-[450px]"></section>
+          {/* messages section */}
+          <section className="w-full h-screen bg-[#2f3136]"></section>
+        </section>
+      </div>
     </article>
   );
 };
