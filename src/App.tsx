@@ -4,6 +4,7 @@ import AuthRegister from "./pages/auth/AuthRegister";
 import PublicRoute from "./components/common/PublicRoute";
 import AuthLogin from "./pages/auth/AuthLogin";
 import PrivateRoute from "./components/common/PrivateRoute";
+import CommonLayout from "./layouts/common/common.layout";
 
 function App() {
   const user = useUser((state) => state.user);
@@ -44,7 +45,7 @@ function App() {
         path="/chat"
         element={
           <PrivateRoute>
-            <div>Let's think</div>
+            <CommonLayout />
           </PrivateRoute>
         }
       />
