@@ -12,7 +12,7 @@ interface IUserControlProps {}
 const UserControl: React.FunctionComponent<IUserControlProps> = () => {
   const user = useUser((state) => state.user);
   return (
-    <div className="w-[380px] px-3 py-2 rounded-md bg-[#2f3136] flex items-center justify-between absolute left-5 bottom-5">
+    <div className="px-3 py-2 rounded-md bg-[#2f3136] flex items-center justify-between">
       {/* icon display name and username */}
       <div className="flex items-center gap-x-4">
         <div className="w-10 h-10 rounded-full bg-[#ed5555] flex items-center justify-center">
@@ -24,27 +24,27 @@ const UserControl: React.FunctionComponent<IUserControlProps> = () => {
         </div>
       </div>
       {/* user control of video, mic and logout */}
-      <div className="flex items-center gap-x-2">
+      <div className="flex items-center gap-x-2 text-gray-500">
         {/* camera */}
         <button
           type="button"
           className="flex items-center justify-center p-2 rounded-sm hover:bg-[#4a4c51] transition-all duration-150 ease-in-out cursor-pointer"
         >
-          <VideoCamera size={20} fill="bold" />
+          <VideoCamera size={20} />
         </button>
         {/* mic */}
         <button
           type="button"
           className="flex items-center justify-center p-2 rounded-sm hover:bg-[#4a4c51] transition-all duration-150 ease-in-out cursor-pointer"
         >
-          <Microphone size={20} fill="bold" />
+          <Microphone size={20} />
         </button>
         {/* logout */}
         <button
           type="button"
           className="flex items-center justify-center p-2 rounded-sm hover:bg-[#4a4c51] transition-all duration-150 ease-in-out cursor-pointer"
         >
-          <SignOut size={20} fill="bold" />
+          <SignOut size={20} />
         </button>
       </div>
     </div>
