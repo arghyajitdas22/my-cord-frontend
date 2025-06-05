@@ -23,6 +23,15 @@ export const registerUserResponseSchema = responseSchema.extend({
   }),
 });
 
+export const searchUserResponseSchema = responseSchema.extend({
+  data: z.object({
+    users: z.array(userStateSchema),
+    totalUsers: z.number(),
+    totalPages: z.number(),
+    currentPage: z.number(),
+  }),
+});
+
 export type ApiResponse<T> = z.infer<typeof responseSchema> & { data: T };
 
 export type ErrorResponse = z.infer<typeof errorResponseSchema>;

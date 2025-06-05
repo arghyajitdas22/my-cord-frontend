@@ -1,12 +1,21 @@
 import * as React from "react";
 import Modal from "../../layouts/common/modal.layout";
 import { useAddFriendModal } from "../../hooks/useAddFriendModal";
+import { TUserState } from "../../validators/user.validator";
+import UserSearch from "../common/UserSearch";
+import UserControl from "../common/UserControl";
 
 interface IAddFriendModalProps {}
 
 const AddFriendModal: React.FunctionComponent<IAddFriendModalProps> = () => {
   const display = useAddFriendModal((state) => state.display);
   const close = useAddFriendModal((state) => state.close);
+  const [selectedUser, setSelectedUser] = React.useState<TUserState | null>(
+    null
+  );
+  const onSelect = (user: TUserState) => {
+    setSelectedUser(user);
+  };
   if (!display) return null;
   return (
     <Modal
@@ -14,7 +23,22 @@ const AddFriendModal: React.FunctionComponent<IAddFriendModalProps> = () => {
       subheading="Send friend request"
       onClose={close}
     >
-      <p>add friend modal</p>
+      <div className="flex flex-col space-y-2 pt-2">
+        {selectedUser ? (
+          <UserControl showIcons={false} user={selectedUser} />
+        ) : (
+          <UserSearch
+            onSelect={onSelect}
+            inputStyles="w-full p-2 rounded-md border-2 border-gray-500 focus:border-[#b8a7ea] focus:outline-[#b8a7ea] focus:ring-[#b8a7ea] placeholder:text-gray-300 text-white"
+          />
+        )}
+        <button
+          type="button"
+          className="w-full p-2 rounded-md text-white font-semibold text-sm text-center bg-[#b8a7ea]"
+        >
+          Send Friend Request
+        </button>
+      </div>
     </Modal>
   );
 };

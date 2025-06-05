@@ -10,8 +10,8 @@ interface IModalProps {
 
 const Modal: React.FunctionComponent<IModalProps> = (props) => {
   return (
-    <article className="h-screen w-screen overflow-hidden bg-black/30 absolute top-0 left-0 z-30 flex items-center justify-center">
-      <section className="w-[500px] min-w-[500px] max-w-[500px] bg-[#1e2124] rounded-md p-3 h-[200px] relative">
+    <article className="h-screen w-screen overflow-hidden bg-black/70 absolute top-0 left-0 z-30 flex items-center justify-center">
+      <section className="w-[500px] min-w-[500px] max-w-[500px] bg-[#1e2124] rounded-md p-3 relative">
         <X
           size={16}
           className="absolute top-2 right-2 cursor-pointer"

@@ -7,7 +7,7 @@ interface IAddFriendModalStore {
 }
 
 export const useAddFriendModal = create<IAddFriendModalStore>()((set) => ({
-  display: false,
+  display: true,
   open: () => set({ display: true }),
   close: () => set({ display: false }),
 }));
