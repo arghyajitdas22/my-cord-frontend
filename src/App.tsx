@@ -5,10 +5,22 @@ import PublicRoute from "./components/common/PublicRoute";
 import AuthLogin from "./pages/auth/AuthLogin";
 import PrivateRoute from "./components/common/PrivateRoute";
 import CommonLayout from "./layouts/common/common.layout";
+import { useSocket } from "./hooks/useSocket";
+import { useEffect } from "react";
 
 function App() {
   const user = useUser((state) => state.user);
   const accessToken = localStorage.getItem("accessToken");
+  const initializeSocket = useSocket((state) => state.initializeSocket);
+  const disconnectSocket = useSocket((state) => state.disconnectSocket);
+
+  useEffect(() => {
+    if (user && accessToken) {
+      initializeSocket();
+    }
+
+    return () => disconnectSocket();
+  }, [user, accessToken, initializeSocket]);
 
   return (
     <Routes>
