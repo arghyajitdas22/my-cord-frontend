@@ -1,12 +1,12 @@
 import { create } from "zustand";
 
-interface IAddFriendModalStore {
+interface IInvitationModalStore {
   display: boolean;
   open: () => void;
   close: () => void;
 }
 
-export const useAddFriendModal = create<IAddFriendModalStore>()((set) => ({
+export const useInvitationModal = create<IInvitationModalStore>()((set) => ({
   display: false,
   open: () => set({ display: true }),
   close: () => set({ display: false }),
