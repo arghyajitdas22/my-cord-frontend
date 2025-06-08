@@ -32,8 +32,18 @@ export const searchUserResponseSchema = responseSchema.extend({
   }),
 });
 
+export const friendRequestSocketPayloadSchema = z.object({
+  receiver: z.string(),
+  status: z.enum(["pending", "accepted", "rejected"]),
+  sender: userStateSchema,
+});
+
 export type ApiResponse<T> = z.infer<typeof responseSchema> & { data: T };
 
 export type ErrorResponse = z.infer<typeof errorResponseSchema>;
 
 export type TRegisterUserData = z.infer<typeof registerUserResponseSchema>;
+
+export type TFriendRequestSocketPayloadSchema = z.infer<
+  typeof friendRequestSocketPayloadSchema
+>;

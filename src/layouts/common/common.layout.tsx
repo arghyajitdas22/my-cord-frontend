@@ -5,11 +5,31 @@ import AddFriendModal from "../../components/modals/AddFriendModal";
 import { Notification } from "@phosphor-icons/react";
 import InvitationModal from "../../components/modals/InvitationModal";
 import { useInvitationModal } from "../../hooks/useInvitationModal";
+import { useSocket } from "../../hooks/useSocket";
+import { ChatEventEnum } from "../../assets/data/data";
+import { handleFriendRequestNotification } from "../../services/user.service";
 
 interface ICommonLayoutProps {}
 
 const CommonLayout: React.FunctionComponent<ICommonLayoutProps> = () => {
   const open = useInvitationModal((state) => state.open);
+  const socket = useSocket((state) => state.socket);
+
+  React.useEffect(() => {
+    if (!socket) return;
+
+    socket.on(
+      ChatEventEnum.FRIEND_REQUEST_SENT_EVENT,
+      handleFriendRequestNotification
+    );
+
+    return () => {
+      socket.off(
+        ChatEventEnum.FRIEND_REQUEST_SENT_EVENT,
+        handleFriendRequestNotification
+      );
+    };
+  }, [socket]);
   return (
     <>
       <AddFriendModal />

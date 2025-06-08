@@ -1,5 +1,9 @@
+import { toast } from "react-toastify";
 import axiosInstance from "../libs/axiosInstance";
-import { searchUserResponseSchema } from "../validators/response.validator";
+import {
+  searchUserResponseSchema,
+  TFriendRequestSocketPayloadSchema,
+} from "../validators/response.validator";
 
 export const searchUser = async (pageParam: number, search: string) => {
   const response = await axiosInstance.get("/users/search", {
@@ -7,4 +11,10 @@ export const searchUser = async (pageParam: number, search: string) => {
   });
   const validatedResponse = searchUserResponseSchema.parse(response);
   return validatedResponse.data;
+};
+
+export const handleFriendRequestNotification = (
+  payload: TFriendRequestSocketPayloadSchema
+) => {
+  toast.info(`${payload.sender.username} sent you a new invitation`);
 };
