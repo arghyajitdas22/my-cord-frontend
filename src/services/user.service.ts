@@ -16,5 +16,13 @@ export const searchUser = async (pageParam: number, search: string) => {
 export const handleFriendRequestNotification = (
   payload: TFriendRequestSocketPayloadSchema
 ) => {
+  console.log("here", payload);
   toast.info(`${payload.sender.username} sent you a new invitation`);
+};
+
+export const sendFriendRequest = async (receiverId: string) => {
+  const response = await axiosInstance.post(
+    `/users/send-friend-request/${receiverId}`
+  );
+  return response;
 };

@@ -16,6 +16,7 @@ export const useSocket = create<ISocketStore>()((set) => ({
       auth: { accessToken },
     });
     set({ socket });
+    console.log("socket updated");
   },
   disconnectSocket: () => {
     set((state) => {

@@ -4,6 +4,7 @@ import { useAddFriendModal } from "../../hooks/useAddFriendModal";
 import { TUserState } from "../../validators/user.validator";
 import UserSearch from "../common/UserSearch";
 import UserControl from "../common/UserControl";
+import { useFriendRequest } from "../../hooks/useFriendRequest";
 
 interface IAddFriendModalProps {}
 
@@ -13,9 +14,23 @@ const AddFriendModal: React.FunctionComponent<IAddFriendModalProps> = () => {
   const [selectedUser, setSelectedUser] = React.useState<TUserState | null>(
     null
   );
+  const { sendFrienRequestMutation } = useFriendRequest();
+
   const onSelect = (user: TUserState) => {
     setSelectedUser(user);
   };
+
+  const handleSendFriendRequest = () => {
+    if (selectedUser) {
+      sendFrienRequestMutation.mutate(selectedUser._id, {
+        onSuccess: () => {
+          setSelectedUser(null);
+          close();
+        },
+      });
+    }
+  };
+
   if (!display) return null;
   return (
     <Modal
@@ -35,6 +50,8 @@ const AddFriendModal: React.FunctionComponent<IAddFriendModalProps> = () => {
         <button
           type="button"
           className="w-full p-2 rounded-md text-white font-semibold text-sm text-center bg-[#b8a7ea]"
+          disabled={!selectedUser}
+          onClick={handleSendFriendRequest}
         >
           Send Friend Request
         </button>
