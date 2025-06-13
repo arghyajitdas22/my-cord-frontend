@@ -1,6 +1,7 @@
 import { toast } from "react-toastify";
 import axiosInstance from "../libs/axiosInstance";
 import {
+  allInvitationsResponseSchema,
   searchUserResponseSchema,
   TFriendRequestSocketPayloadSchema,
 } from "../validators/response.validator";
@@ -25,4 +26,10 @@ export const sendFriendRequest = async (receiverId: string) => {
     `/users/send-friend-request/${receiverId}`
   );
   return response;
+};
+
+export const fetchAllInvitations = async () => {
+  const response = await axiosInstance("/users/getAllInvitations");
+  const validatedResponse = allInvitationsResponseSchema.parse(response);
+  return validatedResponse.data;
 };

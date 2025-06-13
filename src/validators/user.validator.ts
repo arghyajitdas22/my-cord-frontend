@@ -151,6 +151,13 @@ const userStateSchema = z
   })
   .passthrough();
 
+export const friendRequestSchema = z.object({
+  _id: z.string(),
+  receiver: z.string(),
+  status: z.enum(["pending", "accepted", "rejected"]),
+  sender: userStateSchema,
+});
+
 export type TUserState = z.infer<typeof userStateSchema>;
 
 export type TUSerStorage = {
@@ -158,6 +165,8 @@ export type TUSerStorage = {
     user: TUserState;
   };
 };
+
+export type TFriendRequest = z.infer<typeof friendRequestSchema>;
 
 export {
   registerFormUserSchema,
