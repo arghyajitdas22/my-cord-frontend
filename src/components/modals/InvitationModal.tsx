@@ -24,6 +24,11 @@ const InvitationModal: React.FunctionComponent<IInvitationModalProps> = () => {
             <Invitation key={invitation._id} invitation={invitation} />
           ))
         )}
+        {!isLoading && data?.length === 0 && (
+          <p className="text-sm text-center text-white font-semibold">
+            No Invitations Received
+          </p>
+        )}
       </div>
     </Modal>
   );
