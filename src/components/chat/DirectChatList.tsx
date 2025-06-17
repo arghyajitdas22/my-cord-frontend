@@ -1,11 +1,26 @@
 import { Plus } from "@phosphor-icons/react";
 import * as React from "react";
 import { useAddFriendModal } from "../../hooks/useAddFriendModal";
+import { useSocket } from "../../hooks/useSocket";
+import { ChatEventEnum } from "../../assets/data/data";
+import { handleNewDirectChat } from "../../services/user.service";
 
 interface IDirectChatListProps {}
 
 const DirectChatList: React.FunctionComponent<IDirectChatListProps> = () => {
   const open = useAddFriendModal((state) => state.open);
+  const socket = useSocket((state) => state.socket);
+
+  React.useEffect(() => {
+    if (!socket) return;
+
+    socket.on(ChatEventEnum.NEW_CHAT_EVENT, handleNewDirectChat);
+
+    return () => {
+      socket.off(ChatEventEnum.NEW_CHAT_EVENT, handleNewDirectChat);
+    };
+  }, [socket]);
+
   return (
     <>
       <div className="flex items-center justify-between text-gray-500 font-semibold pb-1">

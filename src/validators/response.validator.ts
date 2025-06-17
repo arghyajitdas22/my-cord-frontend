@@ -1,6 +1,11 @@
 import { z } from "zod";
 
-import { friendRequestSchema, userStateSchema } from "./user.validator";
+import {
+  chatSchema,
+  friendRequestSchema,
+  messageSchema,
+  userStateSchema,
+} from "./user.validator";
 
 export const responseSchema = z.object({
   statusCode: z.number().int(),
@@ -34,6 +39,14 @@ export const searchUserResponseSchema = responseSchema.extend({
 
 export const allInvitationsResponseSchema = responseSchema.extend({
   data: z.array(friendRequestSchema),
+});
+
+export const chatResponseSchema = responseSchema.extend({
+  data: chatSchema,
+});
+
+export const messageResponseSchema = responseSchema.extend({
+  data: messageSchema,
 });
 
 export type ApiResponse<T> = z.infer<typeof responseSchema> & { data: T };

@@ -2,6 +2,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   fetchAllInvitations,
   sendFriendRequest,
+  updateFriendRequestStatus,
 } from "../services/user.service";
 import { toast } from "react-toastify";
 
@@ -18,5 +19,16 @@ export const useFriendRequest = () => {
     queryFn: fetchAllInvitations,
   });
 
-  return { sendFrienRequestMutation, getAllInvitations };
+  const updateFriendRequestMutation = useMutation({
+    mutationFn: updateFriendRequestStatus,
+    onSuccess: (data) => {
+      console.log(data);
+    },
+  });
+
+  return {
+    sendFrienRequestMutation,
+    getAllInvitations,
+    updateFriendRequestMutation,
+  };
 };

@@ -9,7 +9,11 @@ interface IInvitationModalProps {}
 const InvitationModal: React.FunctionComponent<IInvitationModalProps> = () => {
   const close = useInvitationModal((state) => state.close);
   const display = useInvitationModal((state) => state.display);
-  const { isLoading, data } = useFriendRequest().getAllInvitations;
+  const { isLoading, data, refetch } = useFriendRequest().getAllInvitations;
+
+  const handleStatusChange = () => {
+    refetch();
+  };
 
   if (!display) return null;
   return (
@@ -21,7 +25,11 @@ const InvitationModal: React.FunctionComponent<IInvitationModalProps> = () => {
           </p>
         ) : (
           data?.map((invitation) => (
-            <Invitation key={invitation._id} invitation={invitation} />
+            <Invitation
+              key={invitation._id}
+              invitation={invitation}
+              handleStatusChange={handleStatusChange}
+            />
           ))
         )}
         {!isLoading && data?.length === 0 && (

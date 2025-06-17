@@ -158,6 +158,30 @@ export const friendRequestSchema = z.object({
   sender: userStateSchema,
 });
 
+export const messageSchema = z.object({
+  _id: z.string(),
+  sender: userStateSchema,
+  chat: z.string(),
+  content: z.string(),
+  attachments: z
+    .array(
+      z.object({
+        url: z.string(),
+      })
+    )
+    .optional(),
+  isEdited: z.boolean(),
+  isDeleted: z.boolean(),
+});
+
+export const chatSchema = z.object({
+  name: z.string(),
+  isGroupChat: z.boolean(),
+  lastMessage: messageSchema.optional(),
+  participants: z.array(userStateSchema),
+  server: z.string().optional(),
+});
+
 export type TUserState = z.infer<typeof userStateSchema>;
 
 export type TUSerStorage = {
@@ -167,6 +191,10 @@ export type TUSerStorage = {
 };
 
 export type TFriendRequest = z.infer<typeof friendRequestSchema>;
+
+export type TMessageSchema = z.infer<typeof messageSchema>;
+
+export type TChatSchema = z.infer<typeof chatSchema>;
 
 export {
   registerFormUserSchema,

@@ -2,9 +2,12 @@ import { toast } from "react-toastify";
 import axiosInstance from "../libs/axiosInstance";
 import {
   allInvitationsResponseSchema,
+  chatResponseSchema,
   searchUserResponseSchema,
   TFriendRequestSocketPayloadSchema,
 } from "../validators/response.validator";
+import { FriendRequestStatus } from "../assets/data/data";
+import { TChatSchema } from "../validators/user.validator";
 
 export const searchUser = async (pageParam: number, search: string) => {
   const response = await axiosInstance.get("/users/search", {
@@ -29,7 +32,25 @@ export const sendFriendRequest = async (receiverId: string) => {
 };
 
 export const fetchAllInvitations = async () => {
-  const response = await axiosInstance("/users/getAllInvitations");
+  const response = await axiosInstance.get("/users/getAllInvitations");
   const validatedResponse = allInvitationsResponseSchema.parse(response);
   return validatedResponse.data;
+};
+
+export const updateFriendRequestStatus = async (data: {
+  reqId: string;
+  status: FriendRequestStatus;
+}) => {
+  const { reqId, status } = data;
+  const response = await axiosInstance.patch(
+    `/users/change-friend-request-status/${reqId}`,
+    { status }
+  );
+  if (status === FriendRequestStatus.REJECTED) return undefined;
+  const validatedResponse = chatResponseSchema.parse(response);
+  return validatedResponse.data;
+};
+
+export const handleNewDirectChat = (payload: TChatSchema) => {
+  console.log(payload);
 };
