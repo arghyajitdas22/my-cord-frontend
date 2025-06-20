@@ -8,6 +8,8 @@ import { useInvitationModal } from "../../hooks/useInvitationModal";
 import { useSocket } from "../../hooks/useSocket";
 import { ChatEventEnum } from "../../assets/data/data";
 import { handleFriendRequestNotification } from "../../services/user.service";
+import AddServerModal from "../../components/modals/AddServerModal";
+
 
 interface ICommonLayoutProps {}
 
@@ -34,6 +36,7 @@ const CommonLayout: React.FunctionComponent<ICommonLayoutProps> = () => {
     <>
       <AddFriendModal />
       <InvitationModal />
+      <AddServerModal />
       <article className="bg-[#202225] h-screen overflow-hidden w-screen ">
         <header className="w-full py-2 text-center text-white text-base uppercase relative flex items-center justify-center">
           my cord
@@ -50,7 +53,17 @@ const CommonLayout: React.FunctionComponent<ICommonLayoutProps> = () => {
             {/* chats section */}
             <ChatSection />
             {/* messages section */}
-            <section className="w-full h-screen bg-[#2f3136]"></section>
+            <section className="w-full h-screen bg-[#2f3136] relative">
+  <div
+    className="absolute top-1/2 left-1/2 w-100 h-100 -translate-x-1/2 -translate-y-1/2 bg-no-repeat bg-center bg-cover  mix-blend-overlay opacity-60"
+    style={{
+      backgroundImage:
+        "url('https://img.icons8.com/ios_filled/512/FFFFFF/discord.png')",
+    }}
+  ></div>
+</section>
+
+
           </section>
         </div>
       </article>
