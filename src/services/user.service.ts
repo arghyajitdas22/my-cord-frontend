@@ -1,13 +1,13 @@
 import { toast } from "react-toastify";
 import axiosInstance from "../libs/axiosInstance";
 import {
+  allChatsResponseScahema,
   allInvitationsResponseSchema,
   chatResponseSchema,
   searchUserResponseSchema,
   TFriendRequestSocketPayloadSchema,
 } from "../validators/response.validator";
 import { FriendRequestStatus } from "../assets/data/data";
-import { TChatSchema } from "../validators/user.validator";
 
 export const searchUser = async (pageParam: number, search: string) => {
   const response = await axiosInstance.get("/users/search", {
@@ -51,6 +51,8 @@ export const updateFriendRequestStatus = async (data: {
   return validatedResponse.data;
 };
 
-export const handleNewDirectChat = (payload: TChatSchema) => {
-  console.log(payload);
+export const getAllDirectChats = async () => {
+  const response = await axiosInstance.get("/chat");
+  const validatedResponse = allChatsResponseScahema.parse(response);
+  return validatedResponse.data;
 };

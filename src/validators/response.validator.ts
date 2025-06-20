@@ -45,6 +45,10 @@ export const chatResponseSchema = responseSchema.extend({
   data: chatSchema,
 });
 
+export const allChatsResponseScahema = responseSchema.extend({
+  data: z.array(chatSchema),
+});
+
 export const messageResponseSchema = responseSchema.extend({
   data: messageSchema,
 });

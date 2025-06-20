@@ -5,8 +5,12 @@ import {
   updateFriendRequestStatus,
 } from "../services/user.service";
 import { toast } from "react-toastify";
+import { useChatServices } from "./useChatServices";
+import { TChatSchema } from "../validators/user.validator";
 
 export const useFriendRequest = () => {
+  const { handleNewChatCreation } = useChatServices();
+
   const sendFrienRequestMutation = useMutation({
     mutationFn: sendFriendRequest,
     onSuccess: () => {
@@ -22,7 +26,7 @@ export const useFriendRequest = () => {
   const updateFriendRequestMutation = useMutation({
     mutationFn: updateFriendRequestStatus,
     onSuccess: (data) => {
-      console.log(data);
+      handleNewChatCreation(data as TChatSchema);
     },
   });
 

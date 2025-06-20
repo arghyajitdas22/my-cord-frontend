@@ -172,14 +172,19 @@ export const messageSchema = z.object({
     .optional(),
   isEdited: z.boolean(),
   isDeleted: z.boolean(),
+  createdAt: z.string().datetime({ offset: true }),
+  updatedAt: z.string().datetime({ offset: true }),
 });
 
 export const chatSchema = z.object({
+  _id: z.string(),
   name: z.string(),
   isGroupChat: z.boolean(),
   lastMessage: messageSchema.optional(),
   participants: z.array(userStateSchema),
   server: z.string().optional(),
+  createdAt: z.string().datetime({ offset: true }),
+  updatedAt: z.string().datetime({ offset: true }),
 });
 
 export type TUserState = z.infer<typeof userStateSchema>;
