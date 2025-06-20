@@ -11,25 +11,20 @@ export const useAuth = () => {
   const registerMutation = useMutation({
     mutationFn: registerUser,
     onSuccess: (data) => {
-      const accessToken = data.data.accessToken;
-      localStorage.setItem("accessToken", accessToken);
-      setUser(data.data.user);
+      localStorage.setItem("accessToken", data.accessToken);
+      setUser({ ...data.user, accessToken: data.accessToken });
       toast.success("User registered successfully");
-      navigate(`/channel/${data.data.user._id}`);
-    },
-    onError: () => {
-      toast.error("User could not be registered");
+      navigate(`/chat`);
     },
   });
 
   const loginMutation = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
-      const accessToken = data.data.accessToken;
-      localStorage.setItem("accessToken", accessToken);
-      setUser(data.data.user);
+      localStorage.setItem("accessToken", data.accessToken);
+      setUser({ ...data.user, accessToken: data.accessToken });
       toast.success("User logged in successfully");
-      navigate(`/channel/${data.data.user._id}`);
+      navigate(`/chat`);
     },
   });
 

@@ -10,29 +10,22 @@ import { useEffect } from "react";
 
 function App() {
   const user = useUser((state) => state.user);
-  const accessToken = localStorage.getItem("accessToken");
   const initializeSocket = useSocket((state) => state.initializeSocket);
   const disconnectSocket = useSocket((state) => state.disconnectSocket);
 
   useEffect(() => {
-    if (user && accessToken) {
+    if (user) {
       initializeSocket();
     }
 
     return () => disconnectSocket();
-  }, [user, accessToken, initializeSocket]);
+  }, [user, initializeSocket]);
 
   return (
     <Routes>
       <Route
         path="/"
-        element={
-          !user || !accessToken ? (
-            <Navigate to={"/login"} />
-          ) : (
-            <Navigate to={"/chat"} />
-          )
-        }
+        element={!user ? <Navigate to={"/login"} /> : <Navigate to={"/chat"} />}
       />
 
       <Route

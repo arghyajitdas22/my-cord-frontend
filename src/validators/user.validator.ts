@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const monthMap: Record<string, number> = {
+export const monthMap: Record<string, number> = {
   january: 1,
   february: 2,
   march: 3,
@@ -15,7 +15,7 @@ const monthMap: Record<string, number> = {
   december: 12,
 };
 
-const registerFormUserSchema = z.object({
+export const registerFormUserSchema = z.object({
   email: z
     .string({ required_error: "Please provide an email" })
     .email()
@@ -64,7 +64,7 @@ const registerFormUserSchema = z.object({
   year: z.number().min(1873).max(new Date().getFullYear()),
 });
 
-const registerUserSchema = z.object({
+export const registerUserSchema = z.object({
   email: z
     .string({ required_error: "Please provide an email" })
     .email()
@@ -118,7 +118,7 @@ const registerUserSchema = z.object({
   }),
 });
 
-const loginUserSchema = z.object({
+export const loginUserSchema = z.object({
   email: z
     .string({ required_error: "Please provide an email" })
     .email()
@@ -142,12 +142,13 @@ const loginUserSchema = z.object({
     ),
 });
 
-const userStateSchema = z
+export const userStateSchema = z
   .object({
     _id: z.string(),
     email: z.string().email(),
     displayName: z.string(),
     username: z.string(),
+    accessToken: z.string(),
   })
   .passthrough();
 
@@ -200,10 +201,3 @@ export type TFriendRequest = z.infer<typeof friendRequestSchema>;
 export type TMessageSchema = z.infer<typeof messageSchema>;
 
 export type TChatSchema = z.infer<typeof chatSchema>;
-
-export {
-  registerFormUserSchema,
-  registerUserSchema,
-  loginUserSchema,
-  userStateSchema,
-};

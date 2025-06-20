@@ -24,14 +24,14 @@ const registerUser = async (registerFormData: IRegisterUserSchema) => {
   const validatedUser = registerUserSchema.parse(refinedUserData);
   const response = await axiosInstance.post("/auth/register", validatedUser);
   const validatedResponse = registerUserResponseSchema.parse(response);
-  return validatedResponse;
+  return validatedResponse.data;
 };
 
 const loginUser = async (loginFormData: ILoginUserSchema) => {
   const validatedUser = loginUserSchema.parse(loginFormData);
   const response = await axiosInstance.post("/auth/login", validatedUser);
   const validatedResponse = registerUserResponseSchema.parse(response);
-  return validatedResponse;
+  return validatedResponse.data;
 };
 
 //--TODO:this has to be done better

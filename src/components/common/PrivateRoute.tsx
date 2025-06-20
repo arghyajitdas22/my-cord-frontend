@@ -10,8 +10,7 @@ const PrivateRoute: React.FunctionComponent<IPrivateRouteProps> = ({
   children,
 }) => {
   const user = useUser((state) => state.user);
-  const accessToken = localStorage.getItem("accessToken");
-  if (!user || !accessToken) return <Navigate to={"/login"} replace />;
+  if (!user) return <Navigate to={"/login"} replace />;
   return children;
 };
 

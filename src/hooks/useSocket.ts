@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import socketio from "socket.io-client";
+import { useUser } from "./useUser";
 
 interface ISocketStore {
   socket: ReturnType<typeof socketio> | null;
@@ -10,13 +11,12 @@ interface ISocketStore {
 export const useSocket = create<ISocketStore>()((set) => ({
   socket: null,
   initializeSocket: () => {
-    const accessToken = localStorage.getItem("accessToken");
+    const user = useUser((state) => state.user);
     const socket = socketio(import.meta.env.VITE_SOCKET_URL, {
       withCredentials: true,
-      auth: { accessToken },
+      auth: { accessToken: user?.accessToken },
     });
     set({ socket });
-    console.log("socket updated");
   },
   disconnectSocket: () => {
     set((state) => {
