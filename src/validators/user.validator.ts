@@ -148,7 +148,7 @@ export const userStateSchema = z
     email: z.string().email(),
     displayName: z.string(),
     username: z.string(),
-    accessToken: z.string(),
+    accessToken: z.string().optional(),
   })
   .passthrough();
 

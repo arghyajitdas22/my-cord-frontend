@@ -30,7 +30,9 @@ const registerUser = async (registerFormData: IRegisterUserSchema) => {
 const loginUser = async (loginFormData: ILoginUserSchema) => {
   const validatedUser = loginUserSchema.parse(loginFormData);
   const response = await axiosInstance.post("/auth/login", validatedUser);
+  console.log(response);
   const validatedResponse = registerUserResponseSchema.parse(response);
+  console.log(validatedResponse);
   return validatedResponse.data;
 };
 

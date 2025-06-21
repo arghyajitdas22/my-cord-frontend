@@ -14,6 +14,7 @@ export const useChatServices = () => {
     queryFn: getAllDirectChats,
     select: (data) => {
       setChats(data);
+      return data;
     },
   });
 
