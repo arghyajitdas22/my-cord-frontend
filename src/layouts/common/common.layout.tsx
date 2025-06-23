@@ -1,6 +1,6 @@
 import * as React from "react";
 import SideNav from "../../components/common/SideNav";
-import ChatSection from "../../components/common/ChatSection";
+import ChatListSection from "../../components/chat/ChatListSection";
 import AddFriendModal from "../../components/modals/AddFriendModal";
 import { Notification } from "@phosphor-icons/react";
 import InvitationModal from "../../components/modals/InvitationModal";
@@ -8,6 +8,7 @@ import { useInvitationModal } from "../../hooks/useInvitationModal";
 import { useSocket } from "../../hooks/useSocket";
 import { ChatEventEnum } from "../../assets/data/data";
 import { handleFriendRequestNotification } from "../../services/user.service";
+import ChatDetails from "../../components/chat/ChatDetails";
 
 interface ICommonLayoutProps {}
 
@@ -47,10 +48,10 @@ const CommonLayout: React.FunctionComponent<ICommonLayoutProps> = () => {
         <div className="flex">
           <SideNav />
           <section className="border-t border-l rounded-tl-md border-[#40444b] h-screen w-full flex">
-            {/* chats section */}
-            <ChatSection />
-            {/* messages section */}
-            <section className="w-full h-screen bg-[#2f3136]"></section>
+            {/* chat list section */}
+            <ChatListSection />
+            {/* chat details section */}
+            <ChatDetails />
           </section>
         </div>
       </article>

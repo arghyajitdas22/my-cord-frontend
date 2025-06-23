@@ -4,9 +4,9 @@ import AuthRegister from "./pages/auth/AuthRegister";
 import PublicRoute from "./components/common/PublicRoute";
 import AuthLogin from "./pages/auth/AuthLogin";
 import PrivateRoute from "./components/common/PrivateRoute";
-import CommonLayout from "./layouts/common/common.layout";
 import { useSocket } from "./hooks/useSocket";
 import { useEffect } from "react";
+import ChatPage from "./pages/chat/Chat.page";
 
 function App() {
   const user = useUser((state) => state.user);
@@ -50,7 +50,7 @@ function App() {
         path="/chat"
         element={
           <PrivateRoute>
-            <CommonLayout />
+            <ChatPage />
           </PrivateRoute>
         }
       />

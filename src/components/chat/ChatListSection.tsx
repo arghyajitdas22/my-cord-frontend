@@ -1,17 +1,17 @@
 import * as React from "react";
 import { useServer } from "../../hooks/useServer";
-import SereverChatList from "../chat/ServerChatList";
-import DirectChatList from "../chat/DirectChatList";
-import UserControl from "./UserControl";
+import SereverChatList from "./ServerChatList";
+import DirectChatList from "./DirectChatList";
+import UserControl from "../common/UserControl";
 import { useUser } from "../../hooks/useUser";
 import { TUserState } from "../../validators/user.validator";
 import { useSocket } from "../../hooks/useSocket";
 import { ChatEventEnum } from "../../assets/data/data";
 import { useChatServices } from "../../hooks/useChatServices";
 
-interface IChatSectionProps {}
+interface IChatListSectionProps {}
 
-const ChatSection: React.FunctionComponent<IChatSectionProps> = () => {
+const ChatListSection: React.FunctionComponent<IChatListSectionProps> = () => {
   const serverId = useServer((state) => state.serverId);
   const user = useUser((state) => state.user);
   const socket = useSocket((state) => state.socket);
@@ -35,4 +35,4 @@ const ChatSection: React.FunctionComponent<IChatSectionProps> = () => {
   );
 };
 
-export default ChatSection;
+export default ChatListSection;
