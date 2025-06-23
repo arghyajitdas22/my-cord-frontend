@@ -51,8 +51,10 @@ export const updateFriendRequestStatus = async (data: {
   return validatedResponse.data;
 };
 
-export const getAllDirectChats = async () => {
-  const response = await axiosInstance.get("/chat");
+export const getAllChats = async (serverId: string | null) => {
+  const response = await axiosInstance.get(
+    serverId ? `/chat/${serverId}` : "/chat"
+  );
   const validatedResponse = allChatsResponseScahema.parse(response);
   return validatedResponse.data;
 };

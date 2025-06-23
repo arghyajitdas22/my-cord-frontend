@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllDirectChats } from "../services/user.service";
+import { getAllChats } from "../services/user.service";
 import { useChat } from "./useChat";
 import { TChatSchema } from "../validators/user.validator";
 import { useServer } from "./useServer";
@@ -9,9 +9,9 @@ export const useChatServices = () => {
   const serverId = useServer((state) => state.serverId);
   const chats = useChat((state) => state.chats);
 
-  const getAllDirectChatsQuery = useQuery({
+  const getAllChatsQuery = useQuery({
     queryKey: ["direct-chats"],
-    queryFn: getAllDirectChats,
+    queryFn: () => getAllChats(serverId),
     select: (data) => {
       setChats(data);
       return data;
@@ -23,5 +23,5 @@ export const useChatServices = () => {
     setChats([chat, ...chats]);
   };
 
-  return { getAllDirectChatsQuery, handleNewChatCreation };
+  return { getAllChatsQuery, handleNewChatCreation };
 };

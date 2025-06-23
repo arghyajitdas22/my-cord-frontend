@@ -36,7 +36,6 @@ const loginUser = async (loginFormData: ILoginUserSchema) => {
   return validatedResponse.data;
 };
 
-//--TODO:this has to be done better
 const refreshUserToken = async () => {
   try {
     const response = await axiosInstance.post("/auth/refresh-token");
@@ -48,7 +47,6 @@ const refreshUserToken = async () => {
   }
 };
 
-//--TODO:This has to be done better
 const logoutUser = async () => {
   try {
     const userData = localStorage.getItem("user-storage")
