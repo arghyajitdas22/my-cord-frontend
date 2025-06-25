@@ -3,6 +3,7 @@ import axiosInstance from "../libs/axiosInstance";
 import {
   allChatsResponseScahema,
   allInvitationsResponseSchema,
+  allMessagesResponseSchema,
   chatResponseSchema,
   searchUserResponseSchema,
   TFriendRequestSocketPayloadSchema,
@@ -56,5 +57,11 @@ export const getAllChats = async (serverId: string | null) => {
     serverId ? `/chat/${serverId}` : "/chat"
   );
   const validatedResponse = allChatsResponseScahema.parse(response);
+  return validatedResponse.data;
+};
+
+export const getAllMessages = async (chatId: string) => {
+  const response = await axiosInstance.get(`/message/${chatId}`);
+  const validatedResponse = allMessagesResponseSchema.parse(response);
   return validatedResponse.data;
 };
