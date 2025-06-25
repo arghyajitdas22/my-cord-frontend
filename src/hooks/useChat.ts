@@ -3,18 +3,18 @@ import { persist } from "zustand/middleware";
 import { TChatSchema } from "../validators/user.validator";
 
 interface IChatStore {
-  chatId: string | null;
+  selectedChat: TChatSchema | null;
   chats: TChatSchema[];
-  setChatId: (chatId: string) => void;
+  setSelectedChat: (chat: TChatSchema) => void;
   setChats: (chats: TChatSchema[]) => void;
 }
 
 export const useChat = create<IChatStore>()(
   persist(
     (set) => ({
-      chatId: null,
+      selectedChat: null,
       chats: [],
-      setChatId: (chatId) => set({ chatId }),
+      setSelectedChat: (chat) => set({ selectedChat: chat }),
       setChats: (chats) => set({ chats }),
     }),
     {

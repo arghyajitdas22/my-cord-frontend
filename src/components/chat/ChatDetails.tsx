@@ -8,10 +8,10 @@ import NoChatSelected from "./NoChatSelected";
 interface IChatDetailsProps {}
 
 const ChatDetails: React.FunctionComponent<IChatDetailsProps> = () => {
-  const chatId = useChat((state) => state.chatId);
+  const selectedChat = useChat((state) => state.selectedChat);
   return (
     <section className="w-full h-screen bg-[#2f3136]">
-      {chatId ? (
+      {selectedChat ? (
         <>
           {/* chat details header */}
           <ChatDetailsHeader />

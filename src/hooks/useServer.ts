@@ -13,7 +13,7 @@ export const useServer = create<IServerStore>()(
       setServerId: (serverId) => set({ serverId }),
     }),
     {
-      name: "server-store",
+      name: "server-storage",
     }
   )
 );

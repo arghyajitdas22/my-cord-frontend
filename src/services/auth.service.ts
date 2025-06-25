@@ -60,6 +60,8 @@ const logoutUser = async () => {
       });
       localStorage.removeItem("accessToken");
       localStorage.removeItem("user-storage");
+      localStorage.removeItem("chat-storage");
+      localStorage.removeItem("server-storage");
     }
     window.location.href = "/login";
   } catch (error) {

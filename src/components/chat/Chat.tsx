@@ -12,10 +12,10 @@ interface IChatProps {
 
 const Chat: React.FunctionComponent<IChatProps> = ({ chat }) => {
   const user = useUser((state) => state.user);
-  const setChatId = useChat((state) => state.setChatId);
+  const setSelectedChat = useChat((state) => state.setSelectedChat);
   return (
     <div
-      onClick={() => setChatId(chat._id)}
+      onClick={() => setSelectedChat(chat)}
       className="px-3 py-2 rounded-md bg-[#2f3136] flex items-senter gap-x-3 cursor-pointer hover:scale-95 transition-all duration-300 ease-in-out"
     >
       <div className="w-12 h-12 rounded-full bg-[#ed5555] flex items-center justify-center">
