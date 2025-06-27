@@ -4,7 +4,7 @@ import { DiscordLogo } from "@phosphor-icons/react";
 import { formatMessageTime } from "../../utils/modifyISOString";
 import { getChatName } from "../../utils/getChatName";
 import { useUser } from "../../hooks/useUser";
-import { useChat } from "../../hooks/useChat";
+import { useChat } from "../../hooks/useSelectedChat";
 
 interface IChatProps {
   chat: TChatSchema;

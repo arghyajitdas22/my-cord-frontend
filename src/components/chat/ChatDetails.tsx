@@ -2,7 +2,7 @@ import * as React from "react";
 import ChatDetailsHeader from "./ChatDetailsHeader";
 import MessageBox from "./MessageBox";
 import MessagesSection from "./MessagesSection";
-import { useChat } from "../../hooks/useChat";
+import { useChat } from "../../hooks/useSelectedChat";
 import NoChatSelected from "./NoChatSelected";
 
 interface IChatDetailsProps {}

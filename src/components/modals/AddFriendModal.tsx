@@ -21,14 +21,12 @@ const AddFriendModal: React.FunctionComponent<IAddFriendModalProps> = () => {
   };
 
   const handleSendFriendRequest = () => {
-    if (selectedUser) {
-      sendFrienRequestMutation.mutate(selectedUser._id, {
-        onSuccess: () => {
-          setSelectedUser(null);
-          close();
-        },
-      });
-    }
+    sendFrienRequestMutation.mutate(selectedUser?._id as string, {
+      onSuccess: () => {
+        setSelectedUser(null);
+        close();
+      },
+    });
   };
 
   if (!display) return null;

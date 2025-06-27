@@ -188,6 +188,10 @@ export const chatSchema = z.object({
   updatedAt: z.string().datetime({ offset: true }),
 });
 
+export const messageBoxSchema = z.object({
+  content: z.string(),
+});
+
 export type TUserState = z.infer<typeof userStateSchema>;
 
 export type TUSerStorage = {
@@ -201,3 +205,5 @@ export type TFriendRequest = z.infer<typeof friendRequestSchema>;
 export type TMessageSchema = z.infer<typeof messageSchema>;
 
 export type TChatSchema = z.infer<typeof chatSchema>;
+
+export type TMessageBoxSchema = z.infer<typeof messageBoxSchema>;

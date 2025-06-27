@@ -7,9 +7,9 @@ import { useSocket } from "../../hooks/useSocket";
 import { ChatEventEnum } from "../../assets/data/data";
 import { useChatServices } from "../../hooks/useChatServices";
 import { useAddFriendModal } from "../../hooks/useAddFriendModal";
-import { useChat } from "../../hooks/useChat";
 import { Plus } from "@phosphor-icons/react";
 import Chat from "./Chat";
+import { useChatList } from "../../hooks/usechatList";
 
 interface IChatListSectionProps {}
 
@@ -17,7 +17,7 @@ const ChatListSection: React.FunctionComponent<IChatListSectionProps> = () => {
   const serverId = useServer((state) => state.serverId);
   const user = useUser((state) => state.user);
   const socket = useSocket((state) => state.socket);
-  const chats = useChat((state) => state.chats);
+  const chats = useChatList((state) => state.chats);
   const { handleNewChatCreation } = useChatServices();
   const openAddFriendModal = useAddFriendModal((state) => state.open);
   const { isLoading } = useChatServices().getAllChatsQuery;

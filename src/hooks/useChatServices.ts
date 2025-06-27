@@ -1,16 +1,18 @@
-import { useQuery } from "@tanstack/react-query";
-import { getAllChats } from "../services/user.service";
-import { useChat } from "./useChat";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { getAllChats, sendMessage } from "../services/user.service";
+import { useChat } from "./useSelectedChat";
 import { TChatSchema, TMessageSchema } from "../validators/user.validator";
 import { useServer } from "./useServer";
+import { useChatList } from "./usechatList";
+import { useMessages } from "./useMessages";
 
 export const useChatServices = () => {
-  const setChats = useChat((state) => state.setChats);
   const serverId = useServer((state) => state.serverId);
-  const chats = useChat((state) => state.chats);
+  const setChats = useChatList((state) => state.setChats);
+  const chats = useChatList((state) => state.chats);
   const selectedChat = useChat((state) => state.selectedChat);
-  const setMessages = useChat((state) => state.setMessages);
-  const messages = useChat((state) => state.messages);
+  const setMessages = useMessages((state) => state.setMessages);
+  const messages = useMessages((state) => state.messages);
 
   const getAllChatsQuery = useQuery({
     queryKey: ["direct-chats"],
@@ -32,5 +34,17 @@ export const useChatServices = () => {
     }
   };
 
-  return { getAllChatsQuery, handleNewChatCreation, handleReceiveMessageEvent };
+  const sendMessageMutation = useMutation({
+    mutationFn: sendMessage,
+    onSuccess: (data) => {
+      setMessages([...messages, data]);
+    },
+  });
+
+  return {
+    getAllChatsQuery,
+    handleNewChatCreation,
+    handleReceiveMessageEvent,
+    sendMessageMutation,
+  };
 };

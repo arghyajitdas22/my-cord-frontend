@@ -5,6 +5,7 @@ import {
   allInvitationsResponseSchema,
   allMessagesResponseSchema,
   chatResponseSchema,
+  messageResponseSchema,
   searchUserResponseSchema,
   TFriendRequestSocketPayloadSchema,
 } from "../validators/response.validator";
@@ -63,5 +64,15 @@ export const getAllChats = async (serverId: string | null) => {
 export const getAllMessages = async (chatId: string) => {
   const response = await axiosInstance.get(`/message/${chatId}`);
   const validatedResponse = allMessagesResponseSchema.parse(response);
+  return validatedResponse.data;
+};
+
+export const sendMessage = async (data: {
+  chatId: string;
+  content: string;
+}) => {
+  const { chatId, content } = data;
+  const response = await axiosInstance.post(`/message/${chatId}`, { content });
+  const validatedResponse = messageResponseSchema.parse(response);
   return validatedResponse.data;
 };

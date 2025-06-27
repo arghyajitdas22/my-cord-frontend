@@ -1,6 +1,6 @@
 import { DiscordLogo, DotsThreeVertical } from "@phosphor-icons/react";
 import * as React from "react";
-import { useChat } from "../../hooks/useChat";
+import { useChat } from "../../hooks/useSelectedChat";
 import { useUser } from "../../hooks/useUser";
 import { getChatName } from "../../utils/getChatName";
 import { TChatSchema, TUserState } from "../../validators/user.validator";
