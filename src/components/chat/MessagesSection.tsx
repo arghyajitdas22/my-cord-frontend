@@ -16,13 +16,9 @@ const MessagesSection: React.FunctionComponent<IMessagesSectionProps> = () => {
   const messages = useMessages((state) => state.messages);
   const socket = useSocket((state) => state.socket);
   const { handleReceiveMessageEvent } = useChatServices();
-  const { isLoading } = useQuery({
+  const { isLoading, isSuccess, data } = useQuery({
     queryKey: ["messages"],
     queryFn: () => getAllMessages(selectedChat?._id as string),
-    select: (data) => {
-      setMessages(data);
-      return data;
-    },
   });
 
   React.useEffect(() => {
@@ -37,6 +33,12 @@ const MessagesSection: React.FunctionComponent<IMessagesSectionProps> = () => {
       );
     };
   }, [socket]);
+
+  React.useEffect(() => {
+    if (isSuccess) {
+      setMessages(data);
+    }
+  }, [isSuccess, data]);
 
   return (
     <div className="w-full h-[80vh] flex flex-col p-2 overflow-y-auto">

@@ -18,9 +18,10 @@ const ChatListSection: React.FunctionComponent<IChatListSectionProps> = () => {
   const user = useUser((state) => state.user);
   const socket = useSocket((state) => state.socket);
   const chats = useChatList((state) => state.chats);
+  const setChats = useChatList((state) => state.setChats);
   const { handleNewChatCreation } = useChatServices();
   const openAddFriendModal = useAddFriendModal((state) => state.open);
-  const { isLoading } = useChatServices().getAllChatsQuery;
+  const { isLoading, isSuccess, data } = useChatServices().getAllChatsQuery;
 
   React.useEffect(() => {
     if (!socket) return;
@@ -31,6 +32,12 @@ const ChatListSection: React.FunctionComponent<IChatListSectionProps> = () => {
       socket.off(ChatEventEnum.NEW_CHAT_EVENT, handleNewChatCreation);
     };
   }, [socket]);
+
+  React.useEffect(() => {
+    if (isSuccess) {
+      setChats(data);
+    }
+  }, [isSuccess, data]);
 
   return (
     <section className="rounded-tl-md h-screen w-[400px] min-w-[400px] max-w-[400px] px-2 pt-2 pb-5 overflow-hidden">

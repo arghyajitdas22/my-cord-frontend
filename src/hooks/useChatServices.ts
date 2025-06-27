@@ -17,10 +17,6 @@ export const useChatServices = () => {
   const getAllChatsQuery = useQuery({
     queryKey: ["direct-chats"],
     queryFn: () => getAllChats(serverId),
-    select: (data) => {
-      setChats(data);
-      return data;
-    },
   });
 
   const handleNewChatCreation = (chat: TChatSchema) => {
