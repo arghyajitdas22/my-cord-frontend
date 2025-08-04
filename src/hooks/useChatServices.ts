@@ -3,7 +3,7 @@ import { getAllChats, sendMessage } from "../services/user.service";
 import { useChat } from "./useSelectedChat";
 import { TChatSchema, TMessageSchema } from "../validators/user.validator";
 import { useServer } from "./useServer";
-import { useChatList } from "./usechatList";
+import { useChatList } from "./useChatList";
 import { useMessages } from "./useMessages";
 
 export const useChatServices = () => {
@@ -25,6 +25,7 @@ export const useChatServices = () => {
   };
 
   const handleReceiveMessageEvent = (message: TMessageSchema) => {
+    console.log(messages);
     if (selectedChat?._id === message.chat) {
       setMessages([...messages, message]);
     }

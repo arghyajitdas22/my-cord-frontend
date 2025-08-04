@@ -9,7 +9,7 @@ import { useChatServices } from "../../hooks/useChatServices";
 import { useAddFriendModal } from "../../hooks/useAddFriendModal";
 import { Plus } from "@phosphor-icons/react";
 import Chat from "./Chat";
-import { useChatList } from "../../hooks/usechatList";
+import { useChatList } from "../../hooks/useChatList";
 
 interface IChatListSectionProps {}
 

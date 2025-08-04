@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import { TChatSchema } from "../validators/user.validator";
 
 interface IChatListStore {
@@ -6,7 +7,14 @@ interface IChatListStore {
   setChats: (chats: TChatSchema[]) => void;
 }
 
-export const useChatList = create<IChatListStore>()((set) => ({
-  chats: [],
-  setChats: (chats) => set({ chats }),
-}));
+export const useChatList = create<IChatListStore>()(
+  persist(
+    (set) => ({
+      chats: [],
+      setChats: (chats) => set({ chats }),
+    }),
+    {
+      name: "chats-storage",
+    }
+  )
+);
