@@ -44,7 +44,7 @@ const ChatListSection: React.FunctionComponent<IChatListSectionProps> = () => {
       {/* based on dm or server */}
       <div className="flex items-center justify-between text-gray-500 font-semibold pb-1">
         <span className="text-sm uppercase">
-          {serverId ? "direct chats" : "group chats"}
+          {serverId ? "group chats" : "direct chats"}
         </span>
         <Plus
           size={16}

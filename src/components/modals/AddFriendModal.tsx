@@ -47,7 +47,7 @@ const AddFriendModal: React.FunctionComponent<IAddFriendModalProps> = () => {
         )}
         <button
           type="button"
-          className="w-full p-2 rounded-md text-white font-semibold text-sm text-center bg-[#b8a7ea]"
+          className="w-full p-2 rounded-md text-white font-semibold text-sm text-center bg-[#b8a7ea] cursor-pointer"
           disabled={!selectedUser}
           onClick={handleSendFriendRequest}
         >

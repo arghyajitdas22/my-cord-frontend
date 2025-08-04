@@ -18,7 +18,7 @@ const Invitation: React.FunctionComponent<IInvitationProps> = ({
   const handleUpdateInvitationStatus = async (status: FriendRequestStatus) => {
     const data = { reqId: invitation._id, status };
     updateFriendRequestMutation.mutate(data, {
-      onSuccess: () => {
+      onSettled: () => {
         handleStatusChange();
       },
     });

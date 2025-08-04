@@ -2,18 +2,23 @@ import * as React from "react";
 import Modal from "../../layouts/common/modal.layout";
 import { useInvitationModal } from "../../hooks/useInvitationModal";
 import Invitation from "../common/Invitation";
-import { useFriendRequest } from "../../hooks/useFriendRequest";
+import { fetchAllInvitations } from "../../services/user.service";
+import { useQuery } from "@tanstack/react-query";
 
 interface IInvitationModalProps {}
 
 const InvitationModal: React.FunctionComponent<IInvitationModalProps> = () => {
+  const { isLoading, data, refetch } = useQuery({
+    queryKey: ["invitations"],
+    queryFn: fetchAllInvitations,
+  });
+
   const close = useInvitationModal((state) => state.close);
   const display = useInvitationModal((state) => state.display);
-  const { isLoading, data, refetch } = useFriendRequest().getAllInvitations;
 
-  const handleStatusChange = () => {
+  React.useEffect(() => {
     refetch();
-  };
+  }, [display]);
 
   if (!display) return null;
   return (
@@ -28,7 +33,7 @@ const InvitationModal: React.FunctionComponent<IInvitationModalProps> = () => {
             <Invitation
               key={invitation._id}
               invitation={invitation}
-              handleStatusChange={handleStatusChange}
+              handleStatusChange={refetch}
             />
           ))
         )}
