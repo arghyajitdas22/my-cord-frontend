@@ -9,6 +9,7 @@ import { useSocket } from "../../hooks/useSocket";
 import { ChatEventEnum } from "../../assets/data/data";
 import { handleFriendRequestNotification } from "../../services/user.service";
 import ChatDetails from "../../components/chat/ChatDetails";
+import AddServerModal from "../../components/modals/AddServerModal";
 
 interface ICommonLayoutProps {}
 
@@ -35,6 +36,7 @@ const CommonLayout: React.FunctionComponent<ICommonLayoutProps> = () => {
     <>
       <AddFriendModal />
       <InvitationModal />
+      <AddServerModal />
       <article className="bg-[#202225] h-screen overflow-hidden w-screen ">
         <header className="w-full py-2 text-center text-white text-base uppercase relative flex items-center justify-center">
           my cord

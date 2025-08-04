@@ -1,8 +1,10 @@
 import {
   DiscordLogo,
   Microphone,
+  MicrophoneSlash,
   SignOut,
   VideoCamera,
+  VideoCameraSlash,
 } from "@phosphor-icons/react";
 import * as React from "react";
 import { TUserState } from "../../validators/user.validator";
@@ -12,10 +14,22 @@ interface IUserControlProps {
   user: TUserState;
 }
 
+
+
 const UserControl: React.FunctionComponent<IUserControlProps> = ({
   showIcons,
   user,
 }) => {
+  const [mic, setMic] = React.useState(true);
+const [video, setVideo] = React.useState(true);
+
+const toggleMic = () => {
+  setMic((prev) => !prev);
+};
+
+const toggleVideo = () => {
+  setVideo((prev) => !prev);
+};
   return (
     <div
       className={`px-3 py-2 rounded-md bg-[#2f3136] ${
@@ -38,21 +52,29 @@ const UserControl: React.FunctionComponent<IUserControlProps> = ({
           {/* camera */}
           <button
             type="button"
-            className="flex items-center justify-center p-2 rounded-sm hover:bg-[#4a4c51] transition-all duration-150 ease-in-out cursor-pointer"
+            className="flex items-center justify-center p-2 rounded-md hover:bg-[#4a4c51] transition-all duration-150 ease-in-out cursor-pointer"
+            onClick={toggleVideo}
           >
-            <VideoCamera size={20} />
+            {video ? <VideoCamera size={20} /> : <VideoCameraSlash size={20} />}
           </button>
           {/* mic */}
+
+          
+          {/* mic */}
+
           <button
             type="button"
-            className="flex items-center justify-center p-2 rounded-sm hover:bg-[#4a4c51] transition-all duration-150 ease-in-out cursor-pointer"
+            className="flex items-center justify-center p-2 rounded-md hover:bg-[#4a4c51] transition-all duration-150 ease-in-out cursor-pointer"
+            onClick={toggleMic}
           >
-            <Microphone size={20} />
+            {mic ? <Microphone size={20} /> : <MicrophoneSlash size={20} />}
           </button>
+          {/* video */}
+
           {/* logout */}
           <button
             type="button"
-            className="flex items-center justify-center p-2 rounded-sm hover:bg-[#4a4c51] transition-all duration-150 ease-in-out cursor-pointer"
+            className="flex items-center justify-center p-2 rounded-md hover:bg-[#4a4c51] transition-all duration-150 ease-in-out cursor-pointer"
           >
             <SignOut size={20} />
           </button>
