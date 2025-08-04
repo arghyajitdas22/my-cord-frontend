@@ -1,12 +1,10 @@
 import * as React from "react";
 import { NavLink } from "react-router";
-import { DiscordLogo } from "@phosphor-icons/react";
-import { AiFillPlusCircle } from "react-icons/ai";
+import { DiscordLogo, PlusCircle } from "@phosphor-icons/react";
 import { useAddServerModal } from "../../hooks/useAddServerModal";
 interface ISideNavProps {}
 
 const SideNav: React.FunctionComponent<ISideNavProps> = () => {
-
   const open = useAddServerModal((state) => state.open);
   return (
     <nav className="hidden md:flex md:flex-col gap-y-2.5 w-16 h-screen">
@@ -32,9 +30,12 @@ const SideNav: React.FunctionComponent<ISideNavProps> = () => {
       <hr className="text-gray-400 mx-2 h-0.5" />
       {/* add server button */}
       <div className="group w-10 h-10 rounded-lg bg-[#40444b] hover:bg-[#5865f2] active:bg-white transition-all duration-150 ease-in-out flex items-center justify-center mx-auto cursor-pointer">
-  <AiFillPlusCircle className="text-white text-xl transition-colors duration-150 group-active:text-black" onClick={() => open()} />
-</div>
-
+        <PlusCircle
+          weight="fill"
+          className="text-white text-xl transition-colors duration-150 group-active:text-black"
+          onClick={() => open()}
+        />
+      </div>
     </nav>
   );
 };
