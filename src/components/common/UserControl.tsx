@@ -8,28 +8,33 @@ import {
 } from "@phosphor-icons/react";
 import * as React from "react";
 import { TUserState } from "../../validators/user.validator";
+import { useAuth } from "../../hooks/useAuth";
 
 interface IUserControlProps {
   showIcons: boolean;
   user: TUserState;
 }
 
-
-
 const UserControl: React.FunctionComponent<IUserControlProps> = ({
   showIcons,
   user,
 }) => {
   const [mic, setMic] = React.useState(true);
-const [video, setVideo] = React.useState(true);
+  const [video, setVideo] = React.useState(true);
+  const { logoutMutation } = useAuth();
 
-const toggleMic = () => {
-  setMic((prev) => !prev);
-};
+  const toggleMic = () => {
+    setMic((prev) => !prev);
+  };
 
-const toggleVideo = () => {
-  setVideo((prev) => !prev);
-};
+  const toggleVideo = () => {
+    setVideo((prev) => !prev);
+  };
+
+  const handleLogout = () => {
+    logoutMutation.mutate();
+  };
+
   return (
     <div
       className={`px-3 py-2 rounded-md bg-[#2f3136] ${
@@ -59,7 +64,6 @@ const toggleVideo = () => {
           </button>
           {/* mic */}
 
-          
           {/* mic */}
 
           <button
@@ -75,6 +79,7 @@ const toggleVideo = () => {
           <button
             type="button"
             className="flex items-center justify-center p-2 rounded-md hover:bg-[#4a4c51] transition-all duration-150 ease-in-out cursor-pointer"
+            onClick={handleLogout}
           >
             <SignOut size={20} />
           </button>

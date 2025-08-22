@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { loginUser, registerUser } from "../services/auth.service";
+import { loginUser, logoutUser, registerUser } from "../services/auth.service";
 import { toast } from "react-toastify";
 import { useUser } from "./useUser";
 import { useNavigate } from "react-router";
@@ -28,5 +28,9 @@ export const useAuth = () => {
     },
   });
 
-  return { registerMutation, loginMutation };
+  const logoutMutation = useMutation({
+    mutationFn: logoutUser,
+  });
+
+  return { registerMutation, loginMutation, logoutMutation };
 };
